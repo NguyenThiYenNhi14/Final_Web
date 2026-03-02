@@ -1,0 +1,119 @@
+<!-- Hero Banner -->
+<div class="hero-banner">
+  <div class="banner-slider">
+    <div *ngFor="let slide of bannerSlides; let i = index" 
+         class="slide" 
+         [class.active]="currentSlide === i"
+         [style.background-image]="'url(' + slide.image + ')'">
+      <div class="slide-content">
+        <h1>{{ slide.title }}</h1>
+        <p>{{ slide.subtitle }}</p>
+        <button class="btn-explore">EXPLORE</button>
+      </div>
+    </div>
+    
+    <!-- Navigation Arrows -->
+    <button class="arrow arrow-left" (click)="prevSlide()">&#8249;</button>
+    <button class="arrow arrow-right" (click)="nextSlide()">&#8250;</button>
+    
+    <!-- Dots Navigation -->
+    <div class="dots">
+      <span *ngFor="let slide of bannerSlides; let i = index" 
+            class="dot" 
+            [class.active]="currentSlide === i"
+            (click)="goToSlide(i)"></span>
+    </div>
+  </div>
+</div>
+
+<!-- Main Container -->
+<div class="container">
+  <h1 style="margin-bottom: 2rem; font-size: 2rem; font-weight: bold;">Shop All Sneakers</h1>
+  
+  <!-- Filter Bar -->
+  <div class="filter-bar">
+    <input 
+      type="text" 
+      class="search-box" 
+      placeholder="Search sneakers..."
+      [(ngModel)]="searchText"
+      (input)="searchProducts()">
+    
+    <select 
+      class="category-select"
+      [(ngModel)]="selectedCategory"
+      (change)="filterByCategory(selectedCategory)">
+      <option *ngFor="let category of categories">{{ category }}</option>
+    </select>
+    
+    <select 
+      class="sort-select"
+      [(ngModel)]="selectedSort"
+      (change)="onSortChange()">
+      <option>Filter</option>
+      <option>Price: Low to High</option>
+      <option>Price: High to Low</option>
+      <option>Newest</option>
+    </select>
+  </div>
+  
+  <!-- Product Grid -->
+  <div class="product-grid" *ngIf="displayedProducts.length > 0">
+    <div *ngFor="let product of displayedProducts" class="product-card">
+      <!-- Discount Badge -->
+      <div class="discount-badge" *ngIf="product.discount">
+        -{{ product.discount }}%
+      </div>
+      
+      <!-- Product Image - CLICKABLE -->
+      <a [routerLink]="['/product', product._id]" class="product-image-link">
+        <div class="product-image">
+          <img [src]="product.image || getProductImage(product)" 
+               [alt]="product.name"
+               (error)="onImageError($event)">
+          <button class="add-to-cart-btn" (click)="$event.preventDefault(); $event.stopPropagation(); addToCart(product)">
+            Add to Cart
+          </button>
+        </div>
+      </a>
+      
+      <!-- Product Info -->
+      <div class="product-info">
+        <div class="brand">{{ product.brand }}</div>
+        
+        <!-- Product Name - CLICKABLE -->
+        <a [routerLink]="['/product', product._id]" class="product-name-link">
+          <h3 class="product-name">{{ product.name }}</h3>
+        </a>
+        
+        <!-- Rating -->
+        <div class="rating">
+          <div class="stars">
+            <span *ngFor="let star of getStars(product.rating)">{{ star }}</span>
+          </div>
+          <span class="rating-text">{{ product.rating }} ({{ product.reviewCount }})</span>
+        </div>
+        
+        <!-- Price -->
+        <div class="price-row">
+          <span class="current-price">{{ formatPrice(product.price) }}</span>
+          <span class="old-price" *ngIf="product.oldPrice || product.originalPrice">
+            {{ formatPrice((product.oldPrice ?? product.originalPrice) ?? 0) }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Show All Products Button - Only show when there are hidden products -->
+  <div class="pagination-controls" *ngIf="!showingAll && filteredProducts.length > itemsPerPage">
+    <button class="btn-show-all" (click)="showAll()">
+      Show All Products
+    </button>
+  </div>
+  
+  <!-- No Results -->
+  <div class="no-results" *ngIf="filteredProducts.length === 0">
+    <p>No products found. Try different filters.</p>
+  </div>
+</div>

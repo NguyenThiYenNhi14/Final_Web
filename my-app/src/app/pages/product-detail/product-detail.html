@@ -1,0 +1,125 @@
+<!-- Loading State -->
+<div class="loading" *ngIf="!product">
+  Loading...
+</div>
+
+<!-- Product Detail -->
+<div class="product-detail-container" *ngIf="product">
+  <!-- Back Button -->
+  <button class="back-button" (click)="backToShop()">
+    Back to Shop
+  </button>
+
+  <!-- Product Detail Section -->
+  <div class="product-detail">
+    <!-- Left: Product Image -->
+    <div class="product-images">
+      <div class="main-image">
+        <img [src]="product.image" [alt]="product.name">
+      </div>
+    </div>
+
+    <!-- Right: Product Info -->
+    <div class="product-info">
+      <!-- Brand -->
+      <p class="brand">{{product.brand}}</p>
+      
+      <!-- Product Name -->
+      <h1 class="product-name">{{product.name}}</h1>
+      
+      <!-- Rating -->
+      <div class="rating">
+        <span class="stars">
+          ★ ★ ★ ★ ★
+        </span>
+        <span class="rating-value">{{product.rating}}</span>
+        <span class="reviews">({{product.reviewCount}} reviews)</span>
+      </div>
+      
+      <!-- Price -->
+      <div class="price-section">
+        <span class="current-price">{{formatPrice(product.price)}}</span>
+        <span class="original-price" *ngIf="product.originalPrice || product.oldPrice">
+          {{formatPrice(product.originalPrice || product.oldPrice || 0)}}
+        </span>
+      </div>
+      
+      <!-- Description -->
+      <p class="description">{{product.description}}</p>
+      
+      <!-- Select Size -->
+      <div class="size-selector">
+        <label>Select Size (US)</label>
+        <div class="sizes">
+          <button 
+            *ngFor="let size of sizes"
+            [class.active]="selectedSize === size"
+            (click)="selectSize(size)">
+            {{size}}
+          </button>
+        </div>
+      </div>
+      
+      <!-- Select Color -->
+      <div class="color-selector">
+        <label>Select Color</label>
+        <div class="colors">
+          <button 
+            *ngFor="let color of colors"
+            [class.active]="selectedColor === color.name.toLowerCase()"
+            [style.background-color]="color.code"
+            (click)="selectColor(color.name.toLowerCase())">
+          </button>
+        </div>
+      </div>
+      
+      <!-- Add to Cart Button -->
+      <button class="add-to-cart-btn" (click)="addToCart()">
+        Add to Cart
+      </button>
+      
+      <!-- Product Features - Simple List -->
+      <div class="product-features">
+        <h3>Product Features</h3>
+        <ul>
+          <li *ngFor="let feature of features">{{feature}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- You May Also Like Section -->
+  <div class="related-products" *ngIf="relatedProducts && relatedProducts.length > 0">
+    <h2>You May Also Like</h2>
+    
+    <div class="related-grid">
+      <div class="related-card" *ngFor="let related of relatedProducts">
+        <a [routerLink]="['/product', related._id]">
+          <div class="related-image">
+            <img [src]="related.image" [alt]="related.name">
+            <span class="discount-badge" *ngIf="related.discount">
+              {{related.discount}}% OFF
+            </span>
+          </div>
+          
+          <div class="related-info">
+            <p class="related-brand">{{related.brand}}</p>
+            <h3 class="related-name">{{related.name}}</h3>
+            
+            <div class="related-rating">
+              <span class="stars">★ {{related.rating}}</span>
+              <span class="reviews">({{related.reviewCount}})</span>
+            </div>
+            
+            <div class="related-price">
+              <span class="current">{{formatPrice(related.price)}}</span>
+              <span class="original" *ngIf="related.originalPrice || related.oldPrice">
+                {{formatPrice(related.originalPrice || related.oldPrice || 0)}}
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

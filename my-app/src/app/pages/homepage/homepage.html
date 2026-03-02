@@ -1,0 +1,297 @@
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <h1 class="hero-title">
+            Step Into <span class="gradient-text">Greatness</span>
+        </h1>
+        <p class="hero-subtitle">
+            Discover premium sneakers crafted for performance, style, and comfort. Elevate your game today.
+        </p>
+        <button class="btn-primary" [routerLink]="['/shop']">
+            Shop Now
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+        </button>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features">
+    <div class="container">
+        <div class="features-grid">
+            <!-- Feature 1: Free Shipping -->
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                    </svg>
+                </div>
+                <h3 class="feature-title">Free Shipping</h3>
+                <p class="feature-description">
+                    Free delivery on all orders over $50. Fast and reliable shipping to your doorstep.
+                </p>
+            </div>
+
+            <!-- Feature 2: 24/7 Support -->
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        <path d="M9 12l2 2 4-4"/>
+                    </svg>
+                </div>
+                <h3 class="feature-title">24/7 Support</h3>
+                <p class="feature-description">
+                    Our customer service team is always ready to help you with any questions or concerns.
+                </p>
+            </div>
+
+            <!-- Feature 3: Easy Returns -->
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                </div>
+                <h3 class="feature-title">Easy Returns</h3>
+                <p class="feature-description">
+                    30-day return policy. If you're not satisfied, return it hassle-free for a full refund.
+                </p>
+            </div>
+
+            <!-- Feature 4: Secure Checkout -->
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                </div>
+                <h3 class="feature-title">Secure Checkout</h3>
+                <p class="feature-description">
+                    Your payment information is encrypted and secure. Shop with confidence and peace of mind.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Product Showcase - Xprowin XM102 -->
+<div class="container_hero">
+    <div class="content-wrapper" #contentWrapper>
+        <!-- Left Text -->
+        <div class="left-text">
+            Xprowin<br />XM102
+        </div>
+
+        <!-- Center Product Area -->
+        <div class="center-product">
+            <!-- Main Product Image -->
+            <div class="product-element main-product">
+                <img src="https://prowin.com.vn/wp-content/uploads/2024/03/1.png" alt="Xprowin XM102 Sneaker">
+            </div>            
+        </div>
+
+        <!-- Right Description -->
+        <div class="right-description">
+            <h3>
+                Prowin is one of the leading enterprises in the field of manufacturing soccer shoes, sports shoes,
+                badminton shoes, safety shoes, and sandals in Vietnam. 18 years of operation, constantly innovating in
+                the footwear industry. Prowin has launched products that are not only diverse in design but also trendy, proving creativity and
+                service to customer needs in Vietnam.
+            </h3>
+            <a href="#" class="cta-button" [routerLink]="['/shop']">
+                <span>Explore Collection</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Latest Products Section -->
+<section class="lastest-section">
+    <div class="container">
+        <h2 class="lastestsection-title">Latest Products</h2>
+
+        <!-- Loading State -->
+        <div class="loading-state" *ngIf="isLoadingLatest">
+            <div class="products-grid">
+                <div class="skeleton-card" *ngFor="let i of [1,2,3,4,5,6,7,8]">
+                    <div class="skeleton-image"></div>
+                    <div class="skeleton-content">
+                        <div class="skeleton-line short"></div>
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line medium"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error State -->
+        <div class="error-state" *ngIf="!isLoadingLatest && errorLatest">
+            <div class="error-message">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                <p>{{ errorLatest }}</p>
+                <button class="btn-retry" (click)="retryLoadProducts()">Try Again</button>
+            </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="products-grid" *ngIf="!isLoadingLatest && !errorLatest && lastestProducts.length > 0">
+            <div class="product-card" *ngFor="let product of lastestProducts" [routerLink]="['/product', product._id]">
+                <div class="product-image">
+                    <img [src]="product.image || 'https://via.placeholder.com/400'" [alt]="product.name">
+                    <div class="discount-badge" *ngIf="product.discount && product.discount > 0">
+                        -{{ product.discount }}%
+                    </div>
+                    <button class="add-to-cart-btn" (click)="$event.stopPropagation(); quickAddToCart(product._id)">
+                        Add to Cart
+                    </button>
+                </div>
+                <div class="product-info">
+                    <div class="product-brand">{{ product.brand }}</div>
+                    <div class="product-name">{{ product.name }}</div>
+                    <div class="product-rating">
+                        <span class="stars">
+                            <ng-container *ngFor="let star of generateStarRating(product.rating)">
+                                {{ getStarChar(star) }}
+                            </ng-container>
+                        </span>
+                        <span>{{ product.rating }}</span>
+                        <span style="color: #9ca3af;">({{ product.reviewCount }})</span>
+                    </div>
+                    <div class="product-price">
+                        <span class="current-price">{{ formatPrice(product.price) }}</span>
+                        <span class="original-price" *ngIf="product.oldPrice && product.oldPrice > product.price">
+                            {{ formatPrice(product.oldPrice) }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" *ngIf="!isLoadingLatest && !errorLatest && lastestProducts.length === 0">
+            <p>No products available at the moment.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Video Section -->
+<section class="video-section">
+    <div class="container">
+        <div class="video-header">
+            <h2 class="video-title">Experience The Movement</h2>
+            <p class="video-subtitle">Watch our latest collection in action</p>
+        </div>
+    </div>
+    <div class="video-box">
+        <video 
+            src="/video/video.mp4" 
+            autoplay 
+            muted 
+            loop 
+            playsinline
+            (error)="onVideoError($event)">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+</section>
+
+<!-- Featured Products Section -->
+<section class="featured-section">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-header-content">
+                <h2 class="section-title">Featured Products</h2>
+                <p class="section-description">
+                    Handpicked selection of our most popular and highly-rated sneakers. These bestsellers combine
+                    style, comfort, and performance to elevate your footwear game.
+                </p>
+            </div>
+            <button class="btn-secondary" [routerLink]="['/shop']">
+                View All
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 8px;">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Loading State -->
+        <div class="loading-state" *ngIf="isLoadingFeatured">
+            <div class="products-grid">
+                <div class="skeleton-card" *ngFor="let i of [1,2,3,4]">
+                    <div class="skeleton-image"></div>
+                    <div class="skeleton-content">
+                        <div class="skeleton-line short"></div>
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line medium"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error State -->
+        <div class="error-state" *ngIf="!isLoadingFeatured && errorFeatured">
+            <div class="error-message">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                <p>{{ errorFeatured }}</p>
+                <button class="btn-retry" (click)="retryLoadProducts()">Try Again</button>
+            </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="products-grid" *ngIf="!isLoadingFeatured && !errorFeatured && featuredProducts.length > 0">
+            <div class="product-card" *ngFor="let product of featuredProducts" [routerLink]="['/product', product._id]">
+                <div class="product-image">
+                    <img [src]="product.image || 'https://via.placeholder.com/400'" [alt]="product.name">
+                    <div class="discount-badge" *ngIf="product.discount && product.discount > 0">
+                        -{{ product.discount }}%
+                    </div>
+                    <button class="add-to-cart-btn" (click)="$event.stopPropagation(); quickAddToCart(product._id)">
+                        Add to Cart
+                    </button>
+                </div>
+                <div class="product-info">
+                    <div class="product-brand">{{ product.brand }}</div>
+                    <div class="product-name">{{ product.name }}</div>
+                    <div class="product-rating">
+                        <span class="stars">
+                            <ng-container *ngFor="let star of generateStarRating(product.rating)">
+                                {{ getStarChar(star) }}
+                            </ng-container>
+                        </span>
+                        <span>{{ product.rating }}</span>
+                        <span style="color: #9ca3af;">({{ product.reviewCount }})</span>
+                    </div>
+                    <div class="product-price">
+                        <span class="current-price">{{ formatPrice(product.price) }}</span>
+                        <span class="original-price" *ngIf="product.oldPrice && product.oldPrice > product.price">
+                            {{ formatPrice(product.oldPrice) }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" *ngIf="!isLoadingFeatured && !errorFeatured && featuredProducts.length === 0">
+            <p>No featured products available.</p>
+        </div>
+    </div>
+</section>
