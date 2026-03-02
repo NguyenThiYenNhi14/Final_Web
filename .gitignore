@@ -1,0 +1,15 @@
+# Angular
+my-app/node_modules
+my-app/dist
+my-app/.angular
+
+# Node server
+my-server/node_modules
+my-server/.env
+
+# VSCode
+.vscode
+
+# OS
+.DS_Store
+Thumbs.db
